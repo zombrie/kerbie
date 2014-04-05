@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+	{% block title %}Add me!! {% endblock %}
+	{% block content %}
+        {% if registered %}
+            Kerbie says: <strong>thank you for registering!</strong>
+			<a href='index'>Return to the homepage.</a><br />
+			<a href='search'>Find your friends!</a><br/>
+			<a href='profile'>Check out your profile!</a><br/>
+        {% else %}
+			Kerbie says: <strong>register here!</strong><br />
+
+			<form id="user_form" method="post" action="register"
+                enctype="multipart/form-data">
+
+				{% csrf_token %}
+				{{ user_form.as_p }}
+				{{ profile_form.as_p }}
+
+				<input type="submit" name="submit" value="Create My Profile, Jeeves!" />
+			</form>
+        {% endif %}
+  {% endblock%}
+

@@ -1,0 +1,40 @@
+{% extends "kerbie/base.html" %}
+
+	{% block title %}Add me!! {% endblock %}
+	{% block body_block %}
+	<div class ="hero-unit">
+	<h1>Register a Kerbie account</h1><br/>
+	<div class="container">
+        {% if registered %}
+            <p>Kerbie says: <strong>thank you for registering!</strong><br/>
+			<a href='/kerbie/'>Return to the homepage.</a><br/>
+			<a href='/kerbie/login/'>Login!</a><br/></p>
+        {% else %}
+			
+	 <form class="form-signin span8" id="user_form" method="post" action="register"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 class="form-signin-heading">Kerbie says: register here!</h2>
+            <!-- Display each form here -->
+
+            {% for field in user_form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}<br />
+            {{ field }}<br />
+            {% endfor %}
+
+            {% for field in profile_form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}<br />
+            {{ field }}<br />
+            {% endfor %}
+
+            <br />
+            <!-- Provide a button to click to submit the form. -->
+            <input class="btn btn-primary" type="submit" name="submit" value="Create My Profile, Jeeves!"/>
+        </form>
+        {% endif %}
+	</div>
+	</div>
+  {% endblock%}
+

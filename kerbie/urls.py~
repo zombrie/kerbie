@@ -1,0 +1,18 @@
+from django.conf.urls import patterns, include, url
+from kerbie import views
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('',
+
+    url(r'^$', views.index, name='index'),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^search/$', views.search, name='search'),
+    url(r'^profile/(\d{1,4})/$', views.view_profile, name='view_profile'),
+    url(r'^matches/$', views.search_matches, name='search_matches'),
+    url(r'^register/', views.register, name='register'),
+    url(r'^login/', views.user_login, name='login'),
+    url(r'^restricted/$', views.restricted, name='restricted'),
+    url(r'^logout/$', views.user_logout, name='logout'),
+)
+

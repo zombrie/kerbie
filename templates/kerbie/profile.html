@@ -1,0 +1,38 @@
+{% extends "kerbie/base.html" %}
+
+{% block title %}{{ user_profile }}'s Profile{% endblock %}
+
+{% block body_block %}
+<div class="hero-unit">
+<h1>Welcome to {{ user_profile }}'s profile! </h1>
+{% if picture %}
+	{{user_profile}}'s profile picture
+	<img src="{{picture.image.url }}" width="100""/><br/><br/>
+{% endif %}
+</p>{{user_profile}}'s birthday is {{birthday|date}}.<br/>
+{{user_profile}} has been a member since {{joined|date}}.<br/>
+{{user_profile}} is located in {{location}}.<br/>
+Check out {{user_profile}}'s <a href='/kerbie/pictures/'>pictures!</a></p>
+<hr>
+<div class="container">
+<form id="post_form" class="span6" method="post" action="profile"
+                enctype="multipart/form-data">
+				<input type="text" name="postBody" max_length=200/><br/>
+				{% csrf_token %}
+				{{ post_form.as_p }}
+
+				<input class="btn btn-primary" type="submit" name="submit" value="Post My Message, Jeeves!"/>
+			</form>
+</div>
+{% if not posts %}
+There are no posts! Would you like to post a message?
+{% else %}
+	{% for post in posts %}
+		From: {{post.username}} on {{post.date}} <br/>
+		{{post.postBody}}<br/>
+			<a href="/kerbie/comments/{{ post.messageId }}/">Comment!</a><br/>
+		<hr>
+	{% endfor %}
+{% endif %}
+</div>
+{% endblock %}

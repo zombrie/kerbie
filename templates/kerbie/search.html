@@ -1,0 +1,31 @@
+{% extends "kerbie/base.html" %}
+
+{% block title %}Searches{% endblock %}
+
+{% block body_block %}
+<div class="hero-unit">
+<h3>Looking for someone?</h3>
+{% if searched %}
+	{% if numProfiles > 0 %}
+		Kerbie says: <strong>Here we go! I found {{ numProfiles }}! Do any of them look familiar?</strong><br/>
+		<a href='/kerbie/profile/'> {{ username }} </a>
+	{% else %}
+		Kerbie says: <strong>Sorry... I didn't find your friend's profile. Have they signed up yet?</strong><br/>
+		<a href='/kerbie/search/'>Search for another friend</a><br/>
+		<a href='/kerbie/'>Go to Homepage</a>
+	{% endif %}
+{% else %}
+<div class="container">
+	<form id="search_form" class="span6" action="search" method="post">{% csrf_token %}
+		{% for field in form.visible_fields %}
+			{{ field.errors }}
+			{{ field.help_text }}
+			{{ field }}
+		{% endfor %}
+		<input class="btn btn-primary" type="submit" name="submit" value="Find My Friend, Jeeves!"/>
+	</form>
+	</div>
+{% endif%}
+</div>
+{% endblock %}
+

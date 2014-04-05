@@ -1,0 +1,19 @@
+from django.contrib import admin
+from kerbie import models
+
+class wallAdmin(admin.ModelAdmin):
+    fields = ['post']
+
+class postAdmin(admin.ModelAdmin):
+    fields = ['wallId', 'messageId', 'userId', 'date', 'postBody', 'comment_id']
+
+class commentAdmin(admin.ModelAdmin):
+    fields = ['messageId', 'commentId', 'userId', 'date', 'commentBody']
+    
+class userProfileAdmin(admin.ModelAdmin):
+    fields = ['user', 'userId', 'picture', 'location', 'joined', 'age']
+
+admin.site.register(wall, wallAdmin)
+admin.site.register(post, postAdmin)
+admin.site.register(comment, commentAdmin)
+admin.site.register(userProfile)

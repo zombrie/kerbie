@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Searches{% endblock %}
+
+{% block content %}
+<p>Looking for someone?</p>
+<form id="search_form" action="search" method="post">
+    {% for field in form.visible_fields %}
+        {{ field.errors }}
+        {{ field.help_text }}
+        {{ field }}
+    {% endfor %}
+    <input type="submit" name="submit" value="Find my friend!" />
+</form>
+{% endblock %}
+

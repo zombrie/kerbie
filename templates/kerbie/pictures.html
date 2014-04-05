@@ -1,0 +1,43 @@
+{% extends "kerbie/base.html" %}
+{% block title %}
+{% if is_user %}
+	Your Pictures
+{% else %}
+	{{ user_profile }}'s Pictures
+{% endif %}
+{% endblock%}
+
+{% block body_block %}
+<div class="hero-unit">
+{% if not pictures %}
+	{% if is_user %}
+		<h3>Kerbie says: *GASP!* You have no pictures!</h3>
+		<p>Want to <a href='/kerbie/add_pictures/'>upload</a> some?</p><br/>
+	{% else %}
+		<h3>Kerbie says: Welcome to... wait. Where are {{user_profile}}'s Pictures??</h3>
+		<p>Where are all the pictures? You should tell {{user_profile}} to add some!</p>
+	{% endif %}
+{% else %}
+	{% if is_user %}
+		<h3>Kerbie says: <strong>Look at all those pictures!</strong></h3>
+		<p>Want to <a href='/kerbie/add_pictures/'>upload</a> more?</p><br/>
+		{% for picture in pictures %}
+			{{ picture.title }}<br/>
+			<img src="{{picture.image.url}}" width="500" /><br/>
+			<form id = "profile_picture_form" action=pictures method="get">
+				<input type="hidden" name="profile_picture" value={{ picture.photoId }}>
+				<input type="submit" class="btn" value="Set Profile Picture" name="setpic">
+			</form>
+			<br/>
+		{% endfor %}
+	{% else %}
+		<h3>Kerbie says: <strong>Welcome to {{user_profile}}'s Pictures!!</strong></h3>
+		{% for picture in pictures %}
+			{{ picture.title }}<br/>
+			<img src="{{picture.image.url}}" width="500"/><br/>
+		{% endfor %}
+	{% endif %}
+{% endif %}
+All done? <a href='/kerbie/profile/'>Return</a> to {{user_profile}}'s profile.
+</div>
+{% endblock %}

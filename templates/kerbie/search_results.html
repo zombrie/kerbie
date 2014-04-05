@@ -1,0 +1,14 @@
+{% extends "kerbie/base.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<p>Search Results:</p>
+<table summary="users">
+<tr><th>Column 1</th><th>Column 2</th>
+{% for u in users %}
+    <tr><td>{{ u.name }}</td><td>{{ u.email }}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% extends "kerbie/base.html" %}
+
+{% block title %}Comment!{% endblock %}
+
+{% block body_block %}
+<div class="hero-unit">
+<h3>Comments!</h3>
+From: {{post.username}} on {{post.date}}<br/>
+	{{post.postBody}}<br/>
+	<div class="container">
+<form id="comment_form" class="span6" method="post" action="comments"
+                enctype="multipart/form-data">
+				<input type="text" name="commentBody" max_length=200/><br/>
+				{% csrf_token %}
+				{{ comment_form.as_p }}
+
+				<input class="btn btn-primary" type="submit" name="submit" value="Post My Comment, Jeeves!"/>
+			</form>
+			</div>
+	<a href='/kerbie/profile/'>Back</a> to {{post.user_wall}}'s profile?
+	{% for comment in comments %}
+	<hr>
+		From: {{comment.username}} on {{comment.date}}<br/>
+		{{comment.commentBody}}<br/>
+	{% endfor %}
+	</div>
+{% endblock %}

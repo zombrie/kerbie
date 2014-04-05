@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user_profile }}{% endblock %}
+
+{% block content %}
+<h3>Welcome to {{ user_profile }}'s profile! </h3>
+<p> {{ user_profile }}'s birthday is {{ birthday }}.<br/>
+	{{user_profile}} has been a member since {{joined}}.<br/>
+	{{user_profile}} is located in {{location}}.<br/></p>
+{% endblock %}
+
+

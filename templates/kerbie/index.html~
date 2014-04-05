@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+<p>Homepage.</p>
+{% if user.is_authenticated %}
+<a href='restricted'>Restricted Page... ooooooh...</a>
+<a href='profile/{{ profileId }}/'>Go to your profile</a>
+<a href='search'>Find a friend?</a>
+<a href='logout'>Log out</a>
+{% else %}
+<a href='register'>Create a profile?</a>
+<a href='login'>Log in?</a>
+{% endif%}
+{% endblock %}
+
